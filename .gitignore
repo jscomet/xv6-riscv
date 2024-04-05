@@ -16,4 +16,5 @@ kernel/kernel
 user/usys.S
 .gdbinit
 compile_commands.events.json
-compile_commands.json
+compile_commands*.json
+.cache/*

@@ -670,14 +670,28 @@ procdump(void)
   char *state;
 
   printf("\n");
-  for(p = proc; p < &proc[NPROC]; p++){
+  for(p = proc; p < &proc[NPROC]; p++){//所有使用的线程
     if(p->state == UNUSED)
       continue;
     if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
-      state = states[p->state];
+      state = states[p->state];//为线程赋值上它的状态
     else
       state = "???";
-    printf("%d %s %s", p->pid, state, p->name);
+    printf("%d %s %s", p->pid, state, p->name);//答应线程信息
     printf("\n");
+  }
+}
+
+//打印睡眠中的进程
+void print_sleeping_process(void){
+  struct proc *p;
+  printf("The sleeping prosses:\n");
+  for(p = proc; p < &proc[NPROC]; p++){
+    if(p->state != SLEEPING)
+      continue;
+    //打印睡眠中的线程
+    printf("%d %s\n", p->pid, p->name);
+    //打印该进程所在的等待队列
+    printf("waiting on: %s \n",*(char*)p->chan);
   }
 }

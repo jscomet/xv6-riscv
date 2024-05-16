@@ -18,3 +18,4 @@ user/usys.S
 compile_commands.events.json
 compile_commands*.json
 .cache/*
+.vscode/*
